@@ -1,0 +1,10 @@
+#时间格式中可能出现的字符
+{"type":"timeString","text":"年 月 日 一 二 三 四 五 六 日 天 : ： - , /"}
+#时间标签可能的类名
+{"type":"timeEvidenceClassName","text":"date time"}
+#时间标签说明中可能的字符
+{"type":"timeEvidenceText","text":"时间 日期"}
+#标题可能的标签
+{"type":"titleTag","text":"h1"}
+#排除非时间字符串的标签
+{"type":"notTimeTag","text":"a"}

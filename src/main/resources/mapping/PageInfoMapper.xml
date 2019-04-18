@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ef.wss.newscollect.mapper.PageInfoMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ef.wss.newscollect.pojo.PageInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="time_s" property="timeS" jdbcType="VARCHAR" />
+		<result column="commit_time" property="commitTime"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs"
+		type="com.ef.wss.newscollect.pojo.PageInfo" extends="BaseResultMap">
+		<result column="article" property="article"
+			jdbcType="LONGVARCHAR" />
+		<result column="source" property="source"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, url, title, time_s, commit_time
+	</sql>
+	<sql id="Blob_Column_List">
+		article, source
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from page_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from page_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.ef.wss.newscollect.pojo.PageInfo">
+		insert into page_info (id, url, title,
+		time_s,
+		commit_time, article,
+		source)
+		values (#{id,jdbcType=INTEGER},
+		#{url,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{timeS,jdbcType=VARCHAR}, #{commitTime,jdbcType=VARCHAR},
+		#{article,jdbcType=LONGVARCHAR},
+		#{source,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.ef.wss.newscollect.pojo.PageInfo">
+		insert into page_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="timeS != null">
+				time_s,
+			</if>
+			<if test="commitTime != null">
+				commit_time,
+			</if>
+			<if test="article != null">
+				article,
+			</if>
+			<if test="source != null">
+				source,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="timeS != null">
+				#{timeS,jdbcType=VARCHAR},
+			</if>
+			<if test="commitTime != null">
+				#{commitTime,jdbcType=VARCHAR},
+			</if>
+			<if test="article != null">
+				#{article,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.ef.wss.newscollect.pojo.PageInfo">
+		update page_info
+		<set>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="timeS != null">
+				time_s = #{timeS,jdbcType=VARCHAR},
+			</if>
+			<if test="commitTime != null">
+				commit_time = #{commitTime,jdbcType=VARCHAR},
+			</if>
+			<if test="article != null">
+				article = #{article,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="source != null">
+				source = #{source,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.ef.wss.newscollect.pojo.PageInfo">
+		update page_info
+		set url = #{url,jdbcType=VARCHAR},
+		title
+		= #{title,jdbcType=VARCHAR},
+		time_s = #{timeS,jdbcType=VARCHAR},
+		commit_time = #{commitTime,jdbcType=VARCHAR},
+		article =
+		#{article,jdbcType=LONGVARCHAR},
+		source =
+		#{source,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.ef.wss.newscollect.pojo.PageInfo">
+		update page_info
+		set url = #{url,jdbcType=VARCHAR},
+		title
+		= #{title,jdbcType=VARCHAR},
+		time_s = #{timeS,jdbcType=VARCHAR},
+		commit_time = #{commitTime,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByUrl" parameterType="java.lang.String"
+		resultType="com.ef.wss.newscollect.pojo.PageInfo">
+		select * from page_info where url = #{url,jdbcType=VARCHAR}
+	</select>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ef.wss.newscollect.mapper.WebTaskMapper">
+	<resultMap id="BaseResultMap"
+		type="com.ef.wss.newscollect.pojo.WebTask">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="task_url" property="taskUrl" jdbcType="VARCHAR" />
+		<result column="task_type" property="taskType"
+			jdbcType="VARCHAR" />
+		<result column="task_deep" property="taskDeep"
+			jdbcType="INTEGER" />
+		<result column="task_rank" property="taskRank"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, task_url, task_type, task_deep, task_rank
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from web_task
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from web_task
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.ef.wss.newscollect.pojo.WebTask">
+		insert into web_task (id, task_url, task_type,
+		task_deep, task_rank)
+		values (#{id,jdbcType=INTEGER},
+		#{taskUrl,jdbcType=VARCHAR},
+		#{taskType,jdbcType=VARCHAR},
+		#{taskDeep,jdbcType=INTEGER}, #{taskRank,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.ef.wss.newscollect.pojo.WebTask">
+		insert into web_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="taskUrl != null">
+				task_url,
+			</if>
+			<if test="taskType != null">
+				task_type,
+			</if>
+			<if test="taskDeep != null">
+				task_deep,
+			</if>
+			<if test="taskRank != null">
+				task_rank,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="taskUrl != null">
+				#{taskUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="taskType != null">
+				#{taskType,jdbcType=VARCHAR},
+			</if>
+			<if test="taskDeep != null">
+				#{taskDeep,jdbcType=INTEGER},
+			</if>
+			<if test="taskRank != null">
+				#{taskRank,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.ef.wss.newscollect.pojo.WebTask">
+		update web_task
+		<set>
+			<if test="taskUrl != null">
+				task_url = #{taskUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="taskType != null">
+				task_type = #{taskType,jdbcType=VARCHAR},
+			</if>
+			<if test="taskDeep != null">
+				task_deep = #{taskDeep,jdbcType=INTEGER},
+			</if>
+			<if test="taskRank != null">
+				task_rank = #{taskRank,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.ef.wss.newscollect.pojo.WebTask">
+		update web_task
+		set task_url =
+		#{taskUrl,jdbcType=VARCHAR},
+		task_type = #{taskType,jdbcType=VARCHAR},
+		task_deep = #{taskDeep,jdbcType=INTEGER},
+		task_rank =
+		#{taskRank,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from web_task;
+	</select>
+	<select id="selectByUrl" parameterType="java.lang.String"
+		resultType="com.ef.wss.newscollect.pojo.WebTask">
+		select * from web_task where task_url =
+		#{task_url,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

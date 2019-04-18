@@ -1,0 +1,58 @@
+server.port: 18188
+reg.util:
+  special.characters: '.html,.htm,.php,=,&,.,?,/,#,-, ,index,list,topic'
+
+spring.task.pool:
+  corePoolSize: 10
+  maxPoolSize: 50
+  queueCapacity: 10
+  
+spring:
+    datasource:
+        url: jdbc:mysql://192.168.81.139:3306/all_website?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        # 配置初始化大小/最小/最大
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        # 获取超时连接时间
+        max-wait: 60000
+        # 间隔多久进行一次检测，检测需关闭的空闲连接
+        time-between-connect-error-millis: 60000
+        # 一个连接池中最小生存的时间
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20
+         
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.ef.wss.newscollect.pojo
+  
+tasks.chedule.period: 15 #单位（分钟）
+##栏目关键字
+column.keywords: 'index,list,topic'
+##无效页面关键字
+invalid.page.keywords: 页面不存在,注册,登录,404
+##登录注册页面关键字
+login.page.keywords: 登录,验证码,用户,密码,注册
+##无效链接
+invalid.link.keywords: 'eefung.com,antfact.com,eagtek.com,eageye.com,eagboy.com,civiw.com,oshadan.com,.jpg,.jpeg,.gif,
+.png,.bmp,.wav,.mp,.doc,.pdf,.xml,sitemap.'
+##无效链接文本
+invalid.text.keywords: '登录,登陆,注册,联系,忘记密码,收藏,立即申请,申请合作,密码,客服,账户中心,我的账户,个人主页,用户反馈,联系我们,
+申请,帮助中心,版权声明,服务协议,微信官号,网站导航'
+##有害信息
+harmfulInfo:
+  minCount: 10
+  keywords: '老虎机,博彩,扑克牌,赌场,娱乐场,澳门威尼斯,真人游戏,真人视讯,真人现金,娱乐城,真钱棋牌,投注,开奖,赌博,开庄,porn,fuck,
+  小色哥,色小姐,网上百家乐,网页百家乐,小明,小红'
+##有害页面检查
+harmful.page.check: true
+  
