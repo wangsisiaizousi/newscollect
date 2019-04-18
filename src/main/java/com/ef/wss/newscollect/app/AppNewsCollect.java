@@ -14,7 +14,6 @@ public class AppNewsCollect {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplicationBuilder(AppNewsCollect.class).bannerMode(Banner.Mode.OFF).build();
 		app.run(args);  
-	int a = 12_21;
 	}
 
 }
